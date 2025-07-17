@@ -1,0 +1,50 @@
+[project]
+name = "chatapp-langgraph"
+version = "0.1.0"
+description = "LangGraph chat applications with MongoDB integration"
+authors = [
+    {name = "Casey Clements", email = "casey.clements@example.com"}
+]
+requires-python = ">=3.9"
+dependencies = [
+    "langchain-core",
+    "langchain-openai", 
+    "langchain-mongodb",
+    "langgraph",
+    "langgraph-checkpoint-mongodb",
+    "langgraph-store-mongodb",
+    "pymongo",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "black>=23.0.0", 
+    "ruff>=0.1.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.ruff.isort]
+known-first-party = ["chatapp_langgraph"]
