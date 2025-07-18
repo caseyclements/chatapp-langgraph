@@ -264,11 +264,11 @@ dev = [
 requires-dist = [
     { name = "black", marker = "extra == 'dev'", specifier = ">=23.0.0" },
     { name = "langchain-core" },
-    { name = "langchain-mongodb", directory = "../langchain-mongodb/libs/langchain-mongodb" },
+    { name = "langchain-mongodb" },
     { name = "langchain-openai" },
     { name = "langgraph" },
-    { name = "langgraph-checkpoint-mongodb", directory = "../langchain-mongodb/libs/langgraph-checkpoint-mongodb" },
-    { name = "langgraph-store-mongodb", directory = "../langchain-mongodb/libs/langgraph-store-mongodb" },
+    { name = "langgraph-checkpoint-mongodb" },
+    { name = "langgraph-store-mongodb" },
     { name = "pymongo" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
     { name = "python-dotenv" },
@@ -614,7 +614,7 @@ wheels = [
 [[package]]
 name = "langchain-mongodb"
 version = "0.6.2"
-source = { directory = "../langchain-mongodb/libs/langchain-mongodb" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "langchain" },
     { name = "langchain-core" },
@@ -625,41 +625,9 @@ dependencies = [
     { name = "numpy", version = "2.3.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pymongo" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "langchain", specifier = ">=0.3" },
-    { name = "langchain-core", specifier = ">=0.3" },
-    { name = "langchain-text-splitters", specifier = ">=0.3" },
-    { name = "lark", specifier = ">=1.1.9,<2.0.0" },
-    { name = "numpy", specifier = ">=1.26" },
-    { name = "pymongo", specifier = ">=4.6.1" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "flaky", specifier = ">=3.8.1" },
-    { name = "freezegun", specifier = ">=1.2.2" },
-    { name = "langchain", specifier = ">=0.3.14" },
-    { name = "langchain-community", specifier = ">=0.3.14" },
-    { name = "langchain-core", specifier = ">=0.3.29" },
-    { name = "langchain-ollama", specifier = ">=0.2.2" },
-    { name = "langchain-openai", specifier = ">=0.2.14" },
-    { name = "langchain-tests", specifier = "==0.3.14" },
-    { name = "langchain-text-splitters", specifier = ">=0.3.5" },
-    { name = "langgraph", specifier = ">=0.2.72" },
-    { name = "mongomock", specifier = ">=4.2.0.post1" },
-    { name = "mypy", specifier = ">=1.10" },
-    { name = "pip", specifier = ">=25.0.1" },
-    { name = "pre-commit", specifier = ">=4.0" },
-    { name = "pypdf", specifier = ">=5.0.1" },
-    { name = "pytest", specifier = ">=7.3.0" },
-    { name = "pytest-asyncio", specifier = ">=0.21.1" },
-    { name = "pytest-mock", specifier = ">=3.10.0" },
-    { name = "pytest-watcher", specifier = ">=0.3.4" },
-    { name = "simsimd", specifier = ">=5.0.0" },
-    { name = "syrupy", specifier = ">=4.0.2" },
-    { name = "typing-extensions", specifier = ">=4.12.2" },
+sdist = { url = "https://files.pythonhosted.org/packages/02/82/ea0cfd092843f09c71d51d9b1fc3a5051fa477fb5d94b95e3b7bf73d6fd2/langchain_mongodb-0.6.2.tar.gz", hash = "sha256:fae221017b5db8a239837b2d163cf6493de6072e217239a95e3aa1fc3303615e", size = 237734, upload-time = "2025-05-12T14:37:51.964Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/15/fa/d47c1a3dd7ff07709023ff75284544a0d315c51e6de69ac01ff90a642dfe/langchain_mongodb-0.6.2-py3-none-any.whl", hash = "sha256:17f740e16582b8b6b241e625fb5c0ae273af1ccb13f2877ade1f1f14049e51a0", size = 59133, upload-time = "2025-05-12T14:37:50.603Z" },
 ]
 
 [[package]]
@@ -721,38 +689,16 @@ wheels = [
 [[package]]
 name = "langgraph-checkpoint-mongodb"
 version = "0.1.4"
-source = { directory = "../langchain-mongodb/libs/langgraph-checkpoint-mongodb" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "langchain-mongodb" },
     { name = "langgraph-checkpoint" },
     { name = "motor" },
     { name = "pymongo" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "langchain-mongodb", specifier = ">=0.6.1" },
-    { name = "langgraph-checkpoint", specifier = ">=2.0.23,<3.0.0" },
-    { name = "motor", specifier = ">3.6.0" },
-    { name = "pymongo", specifier = ">=4.10,<4.14" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "anyio", specifier = ">=4.4.0" },
-    { name = "langchain-core", specifier = ">=0.3.55" },
-    { name = "langchain-ollama", specifier = ">=0.2.2" },
-    { name = "langchain-openai", specifier = ">=0.2.14" },
-    { name = "langgraph", specifier = ">=0.3.23" },
-    { name = "langgraph-checkpoint", specifier = ">=2.0.9" },
-    { name = "mypy", specifier = ">=1.10.0" },
-    { name = "pre-commit", specifier = ">=4.0" },
-    { name = "pytest", specifier = ">=7.2.1" },
-    { name = "pytest-asyncio", specifier = ">=0.21.1" },
-    { name = "pytest-mock", specifier = ">=3.11.1" },
-    { name = "pytest-repeat", specifier = ">=0.9.3" },
-    { name = "pytest-watch", specifier = ">=4.2.0" },
-    { name = "syrupy", specifier = ">=4.0.2" },
+sdist = { url = "https://files.pythonhosted.org/packages/f5/c8/062bef92e96a36ea14658f16c43b87892a98c65137b4e088044790960e91/langgraph_checkpoint_mongodb-0.1.4.tar.gz", hash = "sha256:cae9a63a80d8259388b23e941438b7ae56e20570c1f39f640ccb9f28f77a67fe", size = 144572, upload-time = "2025-06-13T20:20:06.563Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/65/9b/b78c4366cf21bb908f90e348999b9353f85d7c2e40a4e169bb9ebe6ff37a/langgraph_checkpoint_mongodb-0.1.4-py3-none-any.whl", hash = "sha256:5edfa15e0fc03c27b7dda840a001bd210f16abc75b25b64405bf901ca655fdb5", size = 11226, upload-time = "2025-06-13T20:20:05.855Z" },
 ]
 
 [[package]]
@@ -784,28 +730,14 @@ wheels = [
 [[package]]
 name = "langgraph-store-mongodb"
 version = "0.0.1"
-source = { directory = "../langchain-mongodb/libs/langgraph-store-mongodb" }
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "langchain-mongodb" },
     { name = "langgraph-checkpoint" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "langchain-mongodb", specifier = ">=0.6.1" },
-    { name = "langgraph-checkpoint", specifier = ">=2.0.23,<3.0.0" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "langchain-core" },
-    { name = "langchain-openai" },
-    { name = "langgraph" },
-    { name = "motor" },
-    { name = "mypy", specifier = ">=1.10.0" },
-    { name = "pre-commit", specifier = ">=4.0" },
-    { name = "pytest", specifier = ">=7.2.1" },
-    { name = "pytest-asyncio", specifier = ">=0.21.1" },
+sdist = { url = "https://files.pythonhosted.org/packages/8c/21/bf5fc5c371d77dddcaa5bdd219214714a328a6a4d7ca5cebdbaf72715873/langgraph_store_mongodb-0.0.1.tar.gz", hash = "sha256:360c8785d19794b98722fe831b1e49fb9bd75f1f5c3ba66d10aced0e62b67283", size = 95360, upload-time = "2025-05-10T15:00:34.544Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e7/f7/d29039210b93c042081518b4f230f638edc91db2ee5dd237de934be8e97c/langgraph_store_mongodb-0.0.1-py3-none-any.whl", hash = "sha256:85ab0cb0f1e702caa8f640cc3b82627a77442d54ccf4052634cb429445f50052", size = 8628, upload-time = "2025-05-10T15:00:33.56Z" },
 ]
 
 [[package]]
