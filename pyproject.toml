@@ -15,6 +15,8 @@ dependencies = [
     "langgraph-store-mongodb",
     "pymongo",
     "python-dotenv",
+    "fastapi",
+    "uvicorn[standard]",
 ]
 
 [project.optional-dependencies]
@@ -26,6 +28,7 @@ dev = [
 
 [project.scripts]
 atlas-chat = "chatapp_langgraph.terminal:main"
+atlas-chat-web = "chatapp_langgraph.web:main"
 
 [build-system]
 requires = ["hatchling"]

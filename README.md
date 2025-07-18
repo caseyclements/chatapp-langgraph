@@ -1,9 +1,6 @@
 # LangGraph Chat App with MongoDB
 
-This project contains two demo chat applications built with LangGraph and MongoDB integration:
-
-- `chatapp_with_memory.py` - Synchronous version with long-term memory
-- `chatapp_async_in_executor.py` - Asynchronous version with enhanced features
+This project provides Atlas Chat - an AI assistant application built with LangGraph and MongoDB integration, available as both a terminal and web interface.
 
 ## Features
 
@@ -31,6 +28,14 @@ This project contains two demo chat applications built with LangGraph and MongoD
 
 ## Usage
 
+### Run the web service:
+```bash
+uv run atlas-chat-web
+```
+- Web interface: http://127.0.0.1:8000
+- API documentation: http://127.0.0.1:8000/docs
+- Alternative docs: http://127.0.0.1:8000/redoc
+
 ### Run the terminal chat application:
 ```bash
 uv run atlas-chat
@@ -41,7 +46,7 @@ uv run atlas-chat
 uv run examples/chat_sync.py
 ```
 
-### Available Commands in Atlas Chat:
+### Available Commands in Atlas Chat (Terminal):
 - `/help` - Show available commands
 - `/memory` - View your conversation memory
 - `/add_docs` - Add documents to the knowledge base
@@ -49,6 +54,14 @@ uv run examples/chat_sync.py
 - `/clear_db` - Clear entire database (admin)
 - `/quit` or `/exit` - Exit the application
 - Just type normally to chat!
+
+### Web Service API Endpoints:
+- `POST /chat` - Send chat messages
+- `GET /memory/{user_id}` - Get user's conversation memory
+- `POST /documents` - Add documents to knowledge base
+- `GET /users` - List all users
+- `DELETE /database` - Clear database (admin)
+- `GET /health` - Health check
 
 ## Dependencies
 
