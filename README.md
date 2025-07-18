@@ -31,15 +31,24 @@ This project contains two demo chat applications built with LangGraph and MongoD
 
 ## Usage
 
-### Run the synchronous version:
+### Run the terminal chat application:
 ```bash
-uv run python chatapp_with_memory.py
+uv run atlas-chat
 ```
 
-### Run the asynchronous version:
+### Run the example script:
 ```bash
-uv run python chatapp_async_in_executor.py
+uv run examples/chat_sync.py
 ```
+
+### Available Commands in Atlas Chat:
+- `/help` - Show available commands
+- `/memory` - View your conversation memory
+- `/add_docs` - Add documents to the knowledge base
+- `/users` - List all users (admin)
+- `/clear_db` - Clear entire database (admin)
+- `/quit` or `/exit` - Exit the application
+- Just type normally to chat!
 
 ## Dependencies
 

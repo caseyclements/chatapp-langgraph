@@ -52,8 +52,7 @@ class LangGraphChatApp:
         self.mongo_client = MongoClient(MONGODB_CONNECTION_STRING)
         self.db = self.mongo_client[MONGODB_DATABASE]
 
-        # Start from a fresh db # todo consider changing
-        [self.db[coll].drop() for coll in self.db.list_collection_names()]
+        # Database persists between sessions
 
         # Initialize components
         self.llm = ChatOpenAI(
@@ -319,3 +318,18 @@ Please update the memory summary to include any important information about the 
 
         new_thread_id = f"{user_id}_session_{uuid.uuid4().hex[:8]}"
         return new_thread_id
+
+    def clear_database(self) -> None:
+        """Clear all collections in the database (admin function)"""
+        collections_cleared = []
+        for coll_name in self.db.list_collection_names():
+            self.db[coll_name].drop()
+            collections_cleared.append(coll_name)
+        print(f"Database '{MONGODB_DATABASE}' cleared. Collections removed: {collections_cleared}")
+
+    def list_all_users(self) -> list[str]:
+        """List all users who have memory stored"""
+        try:
+            return self.memory_store.collection.distinct("key", {"namespace": ["summaries"]})
+        except Exception:
+            return []
