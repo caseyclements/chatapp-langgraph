@@ -9,10 +9,10 @@ requires-python = ">=3.9"
 dependencies = [
     "langchain-core",
     "langchain-openai", 
-    "langchain-mongodb",
+    "langchain-mongodb @ file:///Users/casey.clements/src/langchain-mongodb/libs/langchain-mongodb",
     "langgraph",
-    "langgraph-checkpoint-mongodb",
-    "langgraph-store-mongodb",
+    "langgraph-checkpoint-mongodb @ file:///Users/casey.clements/src/langchain-mongodb/libs/langgraph-checkpoint-mongodb",
+    "langgraph-store-mongodb @ file:///Users/casey.clements/src/langchain-mongodb/libs/langgraph-store-mongodb",
     "pymongo",
     "python-dotenv",
 ]
@@ -27,6 +27,9 @@ dev = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 
 [tool.uv]
