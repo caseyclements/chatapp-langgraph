@@ -16,6 +16,7 @@ from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langgraph.checkpoint.mongodb import MongoDBSaver
 from langgraph.graph import END, StateGraph
+from langgraph.store.base import BaseStore
 from langgraph.store.mongodb import MongoDBStore
 from pymongo import MongoClient
 
@@ -109,15 +110,15 @@ class LangGraphChatApp:
         # Compile with checkpointer and store
         return workflow.compile(
             checkpointer=self.checkpointer,
-            store=self.memory_store,  # todo - is this used?
+            store=self.memory_store,  # this is injected in nodes that add store as kwarg
         )
 
-    def _load_memory(self, state: ChatState) -> ChatState:
+    def _load_memory(self, state: ChatState, *, store: BaseStore) -> ChatState:
         """Load long-term memory for the user"""
         user_id = state.get("user_id", "default_user")
 
         # Load user's memory summary
-        memory_data = self.memory_store.get(namespace=("summaries",), key=user_id)
+        memory_data = store.get(namespace=("summaries",), key=user_id)
         memory_summary = ""
 
         if memory_data:
@@ -187,7 +188,7 @@ Use the previous context to maintain continuity in the conversation. If the curr
 
         return {"messages": [ai_message]}
 
-    def _update_memory(self, state: ChatState) -> ChatState:
+    def _update_memory(self, state: ChatState, store: BaseStore) -> ChatState:
         """Update long-term memory with conversation insights"""
         user_id = state["user_id"]
         messages = state["messages"]
@@ -218,25 +219,24 @@ Please update the memory summary to include any important information about the 
 
             updated_memory = memory_response.content
 
+            # Get the number of conversations for a user
+            conversation_count = 0
+            if memory_data := store.get(namespace=("summaries",), key=user_id):
+                conversation_count = memory_data.value["conversation_count"]
+
             # Store updated memory
             memory_data = {
                 "summary": updated_memory,
                 "last_updated": datetime.now().isoformat(),
-                "conversation_count": self._get_conversation_count(user_id) + 1,
+                "conversation_count": conversation_count + 1,
             }
 
-            self.memory_store.put(
+            store.put(
                 namespace=("summaries",), key=user_id, value=memory_data, index=None
             )
             print(f"(Updated memory for user {user_id})")
 
-    def _get_conversation_count(self, user_id: str) -> int:
-        """Get the number of conversations for a user"""
-        memory_data = self.memory_store.get(namespace=("summaries",), key=user_id)
-        if memory_data:
-            return memory_data.value["conversation_count"]
-        else:
-            return 0
+
 
     def add_documents(self, documents: list[str], metadatas: list[dict] = None):
         """Add documents to the vector store"""
